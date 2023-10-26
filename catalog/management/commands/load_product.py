@@ -7,18 +7,14 @@ import json
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
+        """Команда загрузки данных в таблицу Product"""
         with open(DATA, encoding='utf-8') as file:
             data = json.load(file)
-
+            product_to_load = []
             for item in data:
                 if item['model'] == 'catalog.product':
-                    Product.objects.create(
-                        id=item['pk'],
-                        name=item['fields']['name'],
-                        description=item['fields']['description'],
-                        image=item['fields']['image'],
-                        category=Category.objects.get(id=item['fields']['category']),
-                        date_added=item['fields']['date_added'],
-                        date_modified=item['fields']['date_modified'],
-                        price=item['fields']['price']
+                    item['fields']['category'] = Category.objects.get(id=item['fields']['category'])
+                    product_to_load.append(
+                        Product(**item['fields'])
                     )
+        Product.objects.bulk_create(product_to_load)
