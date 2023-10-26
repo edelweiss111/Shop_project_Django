@@ -4,14 +4,19 @@ from catalog.models import Product, Contact
 
 # Create your views here.
 def home_page(request):
-    products = Product.objects.all()[:5]
+    """Контроллер домашней страницы"""
+    products = Product.objects.all()
+    last_products = []
     if request.method == 'GET':
-        for product in products:
-            print(product)
+        for product in reversed(products)[:5]:
+            last_products.append(product)
+        for item in last_products[:5]:
+            print(item)
     return render(request, 'catalog/home_page.html')
 
 
 def contact(request):
+    """Контроллер страницы контактов"""
     contacts = Contact.objects.all()
     data = {
         'first_string': {'name': contacts[0].name, 'email': contacts[0].email, 'post': contacts[0].post},
