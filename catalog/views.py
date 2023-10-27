@@ -19,8 +19,7 @@ def contact(request):
     """Контроллер страницы контактов"""
     contacts = Contact.objects.all()
     data = {
-        'first_string': {'name': contacts[0].name, 'email': contacts[0].email, 'post': contacts[0].post},
-        'second_string': {'name': contacts[1].name, 'email': contacts[1].email, 'post': contacts[1].post}
+        'contact_list': contacts,
     }
     if request.method == 'POST':
         name = request.POST.get('name')
