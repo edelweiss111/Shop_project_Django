@@ -1,6 +1,5 @@
 from django.db import models
 import psycopg2
-from config.settings import DATABASES
 from django.db import connection
 
 NULLABLE = {'blank': True, 'null': True}
