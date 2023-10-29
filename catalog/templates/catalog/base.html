@@ -21,10 +21,13 @@
                 <a class="nav-link active" href="{% url 'catalog:home_page' %}">Главная</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="{% url 'catalog:product' %}">Все товары<span class="sr-only">(current)</span></a>
+                <a class="nav-link active" href="{% url 'catalog:products' %}">Все товары<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="{% url 'catalog:contact' %}">Контакты <span class="sr-only">(current)</span></a>
+                <a class="nav-link active" href="{% url 'catalog:user_product' %}">Добавить товар<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'catalog:contacts' %}">Контакты <span class="sr-only">(current)</span></a>
             </li>
         </ul>
     </div>
