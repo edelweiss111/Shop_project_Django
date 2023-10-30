@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from catalog.models import Product, Contact, Category
+from django import forms
 
 
 # Create your views here.
@@ -49,7 +50,7 @@ def user_product(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         description = request.POST.get('description')
-        image = 'products/' + request.POST.get('image')
+        image = request.FILES.get('image')
         price = request.POST.get('price')
         category = Category.objects.get(name=request.POST.get('category'))
         print(f'1 - {name}, 2 - {description}, 3 - {image}, 4 - {price}, 5 - {category}')

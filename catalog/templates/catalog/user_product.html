@@ -2,11 +2,11 @@
 {% block content %}
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <br></br>
-    <h3 class="display-6">Добавить товар</h3>
+    <h2 class="display-4">Добавить товар</h2>
 </div>
 <main>
     <div class="col-md-7 col-lg-8">
-      <form class="needs-validation" method="post">
+      <form enctype="multipart/form-data" class="needs-validation" method="post">
         {% csrf_token %}
         <div class="row g-3">
           <div class="col-12">
