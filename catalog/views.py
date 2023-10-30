@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from catalog.models import Product, Contact, Category
-from django import forms
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -34,10 +34,12 @@ def contacts(request):
 def products(request):
     """Контроллер страницы товаров"""
     products_list = Product.objects.all()
+    paginator = Paginator(products_list, 6)
+    page = request.GET.get('page')
+    page_obj = paginator.get_page(page)
     context = {
-        'product_list': products_list,
-    }
-
+            'product_list': page_obj,
+        }
     return render(request, 'catalog/products.html', context=context)
 
 
