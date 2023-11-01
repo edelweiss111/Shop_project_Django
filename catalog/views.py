@@ -12,7 +12,6 @@ def home_page(request):
         last_products.append(item)
     context = {
         'product_list': last_products[:5],
-        'href': 'products/'
     }
 
     return render(request, 'catalog/home_page.html', context=context)
@@ -40,7 +39,6 @@ def products(request):
     page_obj = paginator.get_page(page)
     context = {
         'product_list': page_obj,
-        'href': ''
     }
     return render(request, 'catalog/products.html', context=context)
 
