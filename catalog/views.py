@@ -12,6 +12,7 @@ def home_page(request):
         last_products.append(item)
     context = {
         'product_list': last_products[:5],
+        'href': 'products/'
     }
 
     return render(request, 'catalog/home_page.html', context=context)
@@ -38,13 +39,14 @@ def products(request):
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
     context = {
-            'product_list': page_obj,
-        }
+        'product_list': page_obj,
+        'href': ''
+    }
     return render(request, 'catalog/products.html', context=context)
 
 
 def user_product(request):
-    """Контроллер страницы товаров"""
+    """Контроллер страницы добавления товара от пользователя"""
     category_list = Category.objects.all()
     context = {
         'category_list': category_list,
@@ -58,3 +60,11 @@ def user_product(request):
         print(f'1 - {name}, 2 - {description}, 3 - {image}, 4 - {price}, 5 - {category}')
         Product.objects.create(name=name, description=description, image=image, price=price, category=category)
     return render(request, 'catalog/user_product.html', context=context)
+
+
+def view_product(request, pk):
+    product = Product.objects.get(pk=pk)
+    context = {
+        'product': product
+    }
+    return render(request, 'catalog/view_product.html', context=context)
