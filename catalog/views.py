@@ -1,20 +1,24 @@
 from django.shortcuts import render
-from catalog.models import Product, Contact, Category
-from django.core.paginator import Paginator
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, DetailView
+
+from catalog.models import Product, Contact
 
 
 # Create your views here.
-def home_page(request):
+class HomeListView(ListView):
     """Контроллер домашней страницы"""
-    products_list = Product.objects.all()
-    last_products = []
-    for item in reversed(products_list):
-        last_products.append(item)
-    context = {
-        'product_list': last_products[:5],
-    }
+    model = Product
 
-    return render(request, 'catalog/home_page.html', context=context)
+    template_name = 'catalog/home_list.html'
+
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = super().get_queryset(*args, **kwargs)
+        queryset = queryset.all()
+        queryset = list(reversed(queryset))
+
+        return queryset[:5]
 
 
 def contacts(request):
@@ -31,38 +35,18 @@ def contacts(request):
     return render(request, 'catalog/contact.html', context=data)
 
 
-def products(request):
+class ProductListView(ListView):
     """Контроллер страницы товаров"""
-    products_list = Product.objects.all()
-    paginator = Paginator(products_list, 6)
-    page = request.GET.get('page')
-    page_obj = paginator.get_page(page)
-    context = {
-        'product_list': page_obj,
-    }
-    return render(request, 'catalog/products.html', context=context)
+    model = Product
+    paginate_by = 6
 
 
-def user_product(request):
+class ProductCreateView(CreateView):
     """Контроллер страницы добавления товара от пользователя"""
-    category_list = Category.objects.all()
-    context = {
-        'category_list': category_list,
-    }
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        description = request.POST.get('description')
-        image = request.FILES.get('image')
-        price = request.POST.get('price')
-        category = Category.objects.get(name=request.POST.get('category'))
-        print(f'1 - {name}, 2 - {description}, 3 - {image}, 4 - {price}, 5 - {category}')
-        Product.objects.create(name=name, description=description, image=image, price=price, category=category)
-    return render(request, 'catalog/user_product.html', context=context)
+    model = Product
+    fields = ('name', 'description', 'image', 'category', 'price')
+    success_url = reverse_lazy('catalog:products')
 
 
-def view_product(request, pk):
-    product = Product.objects.get(pk=pk)
-    context = {
-        'product': product
-    }
-    return render(request, 'catalog/view_product.html', context=context)
+class ProductDetailView(DetailView):
+    model = Product
