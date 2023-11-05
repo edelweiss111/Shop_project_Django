@@ -87,7 +87,7 @@ class Contact(models.Model):
 class Blog(models.Model):
     """Модель таблицы - товары"""
     title = models.CharField(max_length=150, verbose_name='Заголовок')
-    slug = models.CharField(max_length=150, verbose_name='slug')
+    slug = models.CharField(max_length=150, **NULLABLE, verbose_name='slug')
     image = models.ImageField(upload_to='products/', **NULLABLE, verbose_name='Превью')
     content = models.TextField(max_length=1000, verbose_name='Содержимое')
     is_published = models.BooleanField(default=False, verbose_name='Опубликовано')
