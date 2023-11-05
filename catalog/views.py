@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, CreateView, DetailView, TemplateView, UpdateView, DeleteView
 from pytils.translit import slugify
-
+from django.core.mail import send_mail
+from config.settings import EMAIL_HOST_USER
 from catalog.models import Product, Contact, Blog
 
 
@@ -70,6 +71,13 @@ class ArticleDetailView(DetailView):
     def get_object(self, queryset=None):
         self.object = super().get_object(queryset)
         self.object.views_count += 1
+        if self.object.views_count == 100:
+            send_mail(
+                'Вы популярны!!!!',
+                'Вы набрали 100 просмотров',
+                EMAIL_HOST_USER,
+                ['ya.savchik2000@mail.ru']
+            )
         self.object.save()
         return self.object
 
