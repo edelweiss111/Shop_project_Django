@@ -19,7 +19,7 @@
           <strong class="d-inline-block mb-2 text-primary-emphasis">{{item.date_added}}</strong>
           <h3 class="mb-0">{{item.title}}</h3>
           <div class="mb-1 text-body-secondary">{{item.views_count}} просмотров</div>
-          <p class="card-text mb-auto">{{item.content|slice:100}}</p>
+          <p class="card-text mb-auto">{{item.content|slice:100}}...</p>
             <div class="row">
                 <div class="col-6">
                     <a href="{% url 'catalog:view' item.slug %}" class="icon-link gap-1 icon-link-hover stretched-link">
