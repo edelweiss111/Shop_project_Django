@@ -6,5 +6,16 @@
         Добавить товар
     </h2>
 </div>
-{% include 'catalog/includes/inc_form.html' %}
+<div class="row">
+    <div class="col-6">
+        {% include 'catalog/includes/inc_form.html' %}
+    </div>
+    <div class="col-6">
+        {{formset.management_form}}
+        {% for form in formset.forms %}
+            {{form.as_p}}
+        {% endfor %}
+    </div>
+</div>
+
 {% endblock %}
