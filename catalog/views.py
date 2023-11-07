@@ -68,18 +68,20 @@ class ProductUpdateView(UpdateView):
         context_data = super().get_context_data(**kwargs)
         FormSet = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
         if self.request.method == 'POST':
-            formset = FormSet(self.request.POST, instance=self.object)
+            formset = FormSet(self.request.POST)
         else:
-            formset = FormSet(instance=self.object)
+            formset = FormSet()
         context_data['formset'] = formset
         return context_data
 
     def form_valid(self, form):
         context_data = self.get_context_data()
         formset = context_data['formset']
-        if formset.is_valid():
-            formset.instance = self.object
-            formset.save()
+        if form.is_valid():
+            self.object = form.save()
+            if formset.is_valid():
+                formset.instance = self.object
+                formset.save()
 
         return super().form_valid(form)
 
@@ -141,5 +143,3 @@ class ArticleUpdateView(UpdateView):
 class ArticleDeleteView(DeleteView):
     model = Blog
     success_url = reverse_lazy('catalog:articles')
-
-
