@@ -4,6 +4,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, CreateView, DetailView, TemplateView, UpdateView, DeleteView
 from pytils.translit import slugify
 from django.core.mail import send_mail
+from django.db import transaction
 
 from catalog.forms import ProductForm, VersionForm
 from config.settings import EMAIL_HOST_USER
@@ -66,7 +67,7 @@ class ProductUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        FormSet = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
+        FormSet = inlineformset_factory(self.model, Version, form=VersionForm, extra=1)
         if self.request.method == 'POST':
             context_data['formset'] = FormSet(self.request.POST, instance=self.object)
         else:
@@ -81,15 +82,15 @@ class ProductUpdateView(UpdateView):
         #     if item['initial']['is_active']:
         #         counter_active += 1
         # if counter_active > 1:
-        #     raise ValueError('Может быть только 1 активная версия')
-        self.object = form.save()
-        if form.is_valid():
-            self.object = form.save()
-            if formset.is_valid():
-                formset.instance = self.object
-                formset.save()
-            else:
-                return self.form_invalid(form)
+        #     raise ValidationError('Может быть только 1 активная версия')
+        with transaction.atomic():
+            if form.is_valid():
+                self.object = form.save()
+                if formset.is_valid():
+                    formset.instance = self.object
+                    formset.save()
+                else:
+                    return self.form_invalid(form)
 
         return super().form_valid(form)
 

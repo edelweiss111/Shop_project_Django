@@ -20,10 +20,13 @@
                 <h3 class="card-title">Версии</h3>
             </div>
             <div class="card-body">
-                {{formset.management_form}}
-                {% for form in formset %}
-                    {{form.as_p}}
-                {% endfor %}
+                <table>
+                    {{ formset.management_form }}
+                    {% for form in formset %}
+                    {{form.as_table}}
+                    {% endfor %}
+                </table>
+
             </div>
             <div class="card-footer"></div>
         </div>
