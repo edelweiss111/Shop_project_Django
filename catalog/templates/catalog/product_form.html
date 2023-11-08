@@ -4,15 +4,16 @@
     <br></br>
     <h2 class="display-4">
         {% if object %}
-            Редактировать
+        Редактировать
         {% else %}
-            Добавить товар       {% endif %}
+        Добавить товар {% endif %}
     </h2>
 </div>
 <div class="row">
     <div class="col-6">
         {% include 'catalog/includes/inc_form.html' %}
     </div>
+    {% if object %}
     <div class="col-6">
         <div class="card">
             <div class="card-header">
@@ -20,13 +21,14 @@
             </div>
             <div class="card-body">
                 {{formset.management_form}}
-                {% for form in formset.forms %}
+                {% for form in formset %}
                     {{form.as_p}}
                 {% endfor %}
             </div>
             <div class="card-footer"></div>
         </div>
     </div>
+    {% endif %}
 </div>
 
 {% endblock %}
