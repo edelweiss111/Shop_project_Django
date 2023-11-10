@@ -9,29 +9,54 @@
         Добавить товар {% endif %}
     </h2>
 </div>
-<div class="row">
-    <div class="col-6">
-        {% include 'catalog/includes/inc_form.html' %}
-    </div>
-    {% if object %}
-    <div class="col-6">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Версии</h3>
-            </div>
-            <div class="card-body">
-                <table>
-                    {{ formset.management_form }}
-                    {% for form in formset %}
-                    {{form.as_table}}
-                    {% endfor %}
-                </table>
+<div class="col-12">
+    <form enctype="multipart/form-data" class="row" method="post">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-title">
+                    <div class="card-header">
+                        <h4 class="card-title">{{object.name}}</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="col-6">
 
+                        {% csrf_token %}
+                        <table>
+                            {{ form.as_table }}
+                        </table>
+                        <button type="submit" class="btn btn-success">
+                            {% if object %}
+                            Сохранить
+                            {% else %}
+                            Создать
+                            {% endif %}
+                        </button>
+                    </div>
+                </div>
+                <div class="card-footer"></div>
             </div>
-            <div class="card-footer"></div>
         </div>
-    </div>
-    {% endif %}
+        <div class="col-6">
+            <div class="card">
+                {% if object %}
+                <div class="card-header">
+                    <h3 class="card-title">Версии</h3>
+                </div>
+                <div class="card-body">
+                    <table>
+                        {{ formset.management_form }}
+                        {% for form in formset %}
+                        {{form.as_table}}
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="card-footer"></div>
+                {% endif %}
+            </div>
+        </div>
+    </form>
 </div>
+
 
 {% endblock %}
