@@ -76,13 +76,6 @@ class ProductUpdateView(UpdateView):
 
     def form_valid(self, form):
         formset = self.get_context_data()['formset']
-        # counter_active = 0
-        # for item in formset:
-        #     print(item)
-        #     if item['initial']['is_active']:
-        #         counter_active += 1
-        # if counter_active > 1:
-        #     raise ValidationError('Может быть только 1 активная версия')
         with transaction.atomic():
             if form.is_valid():
                 self.object = form.save()

@@ -40,4 +40,3 @@ class VersionForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Version
         exclude = ('product',)
-
