@@ -29,6 +29,16 @@
             <li class="nav-item">
                 <a class="nav-link active" href="{% url 'catalog:contacts' %}">Контакты <span class="sr-only">(current)</span></a>
             </li>
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'users:logout' %}">Выйти <span class="sr-only">(current)</span></a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'users:login' %}">Войти <span class="sr-only">(current)</span></a>
+                </li>
+            {% endif %}
+
         </ul>
     </div>
 </nav>

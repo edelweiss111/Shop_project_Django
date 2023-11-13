@@ -1,392 +1,14 @@
 [
   {
-    "model": "auth.permission",
-    "pk": 1,
-    "fields": {
-      "name": "Can add log entry",
-      "content_type": 1,
-      "codename": "add_logentry"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 2,
-    "fields": {
-      "name": "Can change log entry",
-      "content_type": 1,
-      "codename": "change_logentry"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 3,
-    "fields": {
-      "name": "Can delete log entry",
-      "content_type": 1,
-      "codename": "delete_logentry"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 4,
-    "fields": {
-      "name": "Can view log entry",
-      "content_type": 1,
-      "codename": "view_logentry"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 5,
-    "fields": {
-      "name": "Can add permission",
-      "content_type": 2,
-      "codename": "add_permission"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 6,
-    "fields": {
-      "name": "Can change permission",
-      "content_type": 2,
-      "codename": "change_permission"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 7,
-    "fields": {
-      "name": "Can delete permission",
-      "content_type": 2,
-      "codename": "delete_permission"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 8,
-    "fields": {
-      "name": "Can view permission",
-      "content_type": 2,
-      "codename": "view_permission"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 9,
-    "fields": {
-      "name": "Can add group",
-      "content_type": 3,
-      "codename": "add_group"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 10,
-    "fields": {
-      "name": "Can change group",
-      "content_type": 3,
-      "codename": "change_group"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 11,
-    "fields": {
-      "name": "Can delete group",
-      "content_type": 3,
-      "codename": "delete_group"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 12,
-    "fields": {
-      "name": "Can view group",
-      "content_type": 3,
-      "codename": "view_group"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 13,
-    "fields": {
-      "name": "Can add user",
-      "content_type": 4,
-      "codename": "add_user"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 14,
-    "fields": {
-      "name": "Can change user",
-      "content_type": 4,
-      "codename": "change_user"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 15,
-    "fields": {
-      "name": "Can delete user",
-      "content_type": 4,
-      "codename": "delete_user"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 16,
-    "fields": {
-      "name": "Can view user",
-      "content_type": 4,
-      "codename": "view_user"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 17,
-    "fields": {
-      "name": "Can add content type",
-      "content_type": 5,
-      "codename": "add_contenttype"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 18,
-    "fields": {
-      "name": "Can change content type",
-      "content_type": 5,
-      "codename": "change_contenttype"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 19,
-    "fields": {
-      "name": "Can delete content type",
-      "content_type": 5,
-      "codename": "delete_contenttype"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 20,
-    "fields": {
-      "name": "Can view content type",
-      "content_type": 5,
-      "codename": "view_contenttype"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 21,
-    "fields": {
-      "name": "Can add session",
-      "content_type": 6,
-      "codename": "add_session"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 22,
-    "fields": {
-      "name": "Can change session",
-      "content_type": 6,
-      "codename": "change_session"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 23,
-    "fields": {
-      "name": "Can delete session",
-      "content_type": 6,
-      "codename": "delete_session"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 24,
-    "fields": {
-      "name": "Can view session",
-      "content_type": 6,
-      "codename": "view_session"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 25,
-    "fields": {
-      "name": "Can add Категория",
-      "content_type": 7,
-      "codename": "add_category"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 26,
-    "fields": {
-      "name": "Can change Категория",
-      "content_type": 7,
-      "codename": "change_category"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 27,
-    "fields": {
-      "name": "Can delete Категория",
-      "content_type": 7,
-      "codename": "delete_category"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 28,
-    "fields": {
-      "name": "Can view Категория",
-      "content_type": 7,
-      "codename": "view_category"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 29,
-    "fields": {
-      "name": "Can add Товар",
-      "content_type": 8,
-      "codename": "add_product"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 30,
-    "fields": {
-      "name": "Can change Товар",
-      "content_type": 8,
-      "codename": "change_product"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 31,
-    "fields": {
-      "name": "Can delete Товар",
-      "content_type": 8,
-      "codename": "delete_product"
-    }
-  },
-  {
-    "model": "auth.permission",
-    "pk": 32,
-    "fields": {
-      "name": "Can view Товар",
-      "content_type": 8,
-      "codename": "view_product"
-    }
-  },
-  {
-    "model": "auth.user",
-    "pk": 1,
-    "fields": {
-      "password": "pbkdf2_sha256$600000$wDOnuh45F1V7m1fN7eXrSU$xdc1sd0VdHJZc/h5GvgQXLaC+HKpUZhIvtza9X2/zVk=",
-      "last_login": "2023-10-25T16:48:45.171Z",
-      "is_superuser": true,
-      "username": "edelweis",
-      "first_name": "",
-      "last_name": "",
-      "email": "",
-      "is_staff": true,
-      "is_active": true,
-      "date_joined": "2023-10-25T16:48:18.418Z",
-      "groups": [],
-      "user_permissions": []
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 1,
-    "fields": {
-      "app_label": "admin",
-      "model": "logentry"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 2,
-    "fields": {
-      "app_label": "auth",
-      "model": "permission"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 3,
-    "fields": {
-      "app_label": "auth",
-      "model": "group"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 4,
-    "fields": {
-      "app_label": "auth",
-      "model": "user"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 5,
-    "fields": {
-      "app_label": "contenttypes",
-      "model": "contenttype"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 6,
-    "fields": {
-      "app_label": "sessions",
-      "model": "session"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 7,
-    "fields": {
-      "app_label": "catalog",
-      "model": "category"
-    }
-  },
-  {
-    "model": "contenttypes.contenttype",
-    "pk": 8,
-    "fields": {
-      "app_label": "catalog",
-      "model": "product"
-    }
-  },
-  {
-    "model": "sessions.session",
-    "pk": "6zbh1trg3cbghuzigvrguikn1mr0z7jw",
-    "fields": {
-      "session_data": ".eJxVjDsOwjAQBe_iGln-e01JnzNYa6-DA8iR4qRC3J1ESgHtzLz3ZhG3tcatlyVOxK5MsssvS5ifpR2CHtjuM89zW5cp8SPhp-18mKm8bmf7d1Cx132tyRURwAkPVhhrLRblC4zK-JBIaUNSSW2MDpRHDTsUyTqBGTw4BGCfL7AINpw:1qvh3l:DEOqHWp6E6176bSXY72stYShfq7nPrIA3lIWjkZCmf4",
-      "expire_date": "2023-11-08T16:48:45.175Z"
-    }
-  },
-  {
     "model": "catalog.product",
     "pk": 1,
     "fields": {
       "name": "Samsung-A54",
       "description": "Хороший смартфон",
-      "image": "",
+      "image": "products/img_1.png",
       "category": 1,
-      "date_added": "2023-10-25",
-      "date_modified": "2023-10-25",
+      "date_added": "2023-10-26",
+      "date_modified": "2023-11-10",
       "price": 39999
     }
   },
@@ -394,12 +16,12 @@
     "model": "catalog.product",
     "pk": 2,
     "fields": {
-      "name": "Iphon-15",
+      "name": "Iphone-15",
       "description": "Супер пупер смартфон",
-      "image": "",
+      "image": "products/img_5.png",
       "category": 1,
-      "date_added": "2023-10-25",
-      "date_modified": "2023-10-25",
+      "date_added": "2023-10-26",
+      "date_modified": "2023-11-07",
       "price": 107999
     }
   },
@@ -409,10 +31,10 @@
     "fields": {
       "name": "Huawei MateBook",
       "description": "Очень хороший нэтбук",
-      "image": "",
+      "image": "products/img_4.png",
       "category": 2,
-      "date_added": "2023-10-25",
-      "date_modified": "2023-10-25",
+      "date_added": "2023-10-26",
+      "date_modified": "2023-11-10",
       "price": 56999
     }
   },
@@ -422,10 +44,10 @@
     "fields": {
       "name": "NVIDIA GeForce RTX33060",
       "description": "Мощная видеокарта",
-      "image": "",
+      "image": "products/img_3.png",
       "category": 2,
-      "date_added": "2023-10-25",
-      "date_modified": "2023-10-25",
+      "date_added": "2023-10-26",
+      "date_modified": "2023-11-11",
       "price": 37999
     }
   },
@@ -435,10 +57,10 @@
     "fields": {
       "name": "Indesit ITR4180",
       "description": "Двухкамерный холодильник",
-      "image": "",
+      "image": "products/img_2.png",
       "category": 3,
-      "date_added": "2023-10-25",
-      "date_modified": "2023-10-25",
+      "date_added": "2023-10-26",
+      "date_modified": "2023-11-11",
       "price": 45990
     }
   },
@@ -447,12 +69,25 @@
     "pk": 6,
     "fields": {
       "name": "LG F2J3NS0W",
-      "description": "Крутая стиральная машина",
-      "image": "",
+      "description": "Крутая стиральная машина 1",
+      "image": "products/img_1_o6c9UgB.png",
       "category": 3,
-      "date_added": "2023-10-25",
-      "date_modified": "2023-10-25",
+      "date_added": "2023-10-26",
+      "date_modified": "2023-11-11",
       "price": 36990
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 9,
+    "fields": {
+      "name": "Honor-8X",
+      "description": "Хороший бюджетный смартфон",
+      "image": "products/img.png",
+      "category": 1,
+      "date_added": "2023-10-29",
+      "date_modified": "2023-11-11",
+      "price": 25990
     }
   },
   {
@@ -477,6 +112,86 @@
     "fields": {
       "name": "Бытовая техника",
       "description": "Холодильники, стиральные машины, газовые/электрические плиты, кофемашинки, принадлежности для бытовой техники"
+    }
+  },
+  {
+    "model": "catalog.contact",
+    "pk": 1,
+    "fields": {
+      "name": "Иванов Иван",
+      "email": "ivanov@mail.ru",
+      "post": "Менеджер по продажам"
+    }
+  },
+  {
+    "model": "catalog.contact",
+    "pk": 2,
+    "fields": {
+      "name": "Борисов Максим",
+      "email": "maks.bor@mail.ru",
+      "post": "Специалист по работе с клиентами"
+    }
+  },
+  {
+    "model": "catalog.contact",
+    "pk": 3,
+    "fields": {
+      "name": "Андреев Андрей",
+      "email": "a.andreev@yandex.ru",
+      "post": "Ведущий маркетолог"
+    }
+  },
+  {
+    "model": "catalog.blog",
+    "pk": 4,
+    "fields": {
+      "title": "Ромашка",
+      "slug": "romashka",
+      "image": "products/romashka.jpg",
+      "content": "Род однолетних цветковых растений семейства астровые, или сложноцветные (Asteraceae), по современной классификации объединяет около 70 видов[3]невысоких пахучих трав[4], цветущих с первого года жизни. Наиболее известный вид — Ромашка аптечная (Matricaria chamomilla, syn. Matricaria recutita), это растение широко используется в лечебных и косметических целях.",
+      "is_published": true,
+      "date_added": "2023-11-05",
+      "views_count": 44
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 22,
+    "fields": {
+      "product": 4,
+      "name": "test",
+      "number": 1.0,
+      "is_active": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 23,
+    "fields": {
+      "product": 4,
+      "name": "test1",
+      "number": 1.0,
+      "is_active": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 27,
+    "fields": {
+      "product": 9,
+      "name": "test",
+      "number": 1.0,
+      "is_active": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 28,
+    "fields": {
+      "product": 9,
+      "name": "test1",
+      "number": 1.0,
+      "is_active": true
     }
   }
 ]
