@@ -5,14 +5,14 @@ from django.views.generic import ListView, CreateView, DetailView, TemplateView,
 from pytils.translit import slugify
 from django.core.mail import send_mail
 from django.db import transaction
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from catalog.forms import ProductForm, VersionForm
 from config.settings import EMAIL_HOST_USER
 from catalog.models import Product, Contact, Blog, Version
 
 
 # Create your views here.
-class HomeListView(ListView):
+class HomeListView(LoginRequiredMixin, ListView):
     """Контроллер домашней страницы"""
     model = Product
 
@@ -43,24 +43,30 @@ class ContactTemplateView(TemplateView):
         return render(request, 'catalog/contact.html', context=self.extra_context)
 
 
-class ProductListView(ListView):
+class ProductListView(LoginRequiredMixin, ListView):
     """Контроллер страницы товаров"""
     model = Product
     paginate_by = 6
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     """Контроллер страницы добавления товара от пользователя"""
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:products')
 
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.author = self.request.user
+        self.object.save()
+        return super().form_valid(form)
 
-class ProductDetailView(DetailView):
+
+class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:products')
@@ -88,7 +94,7 @@ class ProductUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-class ArticleListView(ListView):
+class ArticleListView(LoginRequiredMixin, ListView):
     model = Blog
 
     def get_queryset(self, *args, **kwargs):
@@ -97,7 +103,7 @@ class ArticleListView(ListView):
         return queryset
 
 
-class ArticleDetailView(DetailView):
+class ArticleDetailView(LoginRequiredMixin, DetailView):
     model = Blog
 
     def get_object(self, queryset=None):
@@ -114,7 +120,7 @@ class ArticleDetailView(DetailView):
         return self.object
 
 
-class ArticleCreateView(CreateView):
+class ArticleCreateView(LoginRequiredMixin, CreateView):
     model = Blog
     fields = ('title', 'content', 'image', 'is_published')
     success_url = reverse_lazy('catalog:articles')
@@ -127,7 +133,7 @@ class ArticleCreateView(CreateView):
         return super().form_valid(form)
 
 
-class ArticleUpdateView(UpdateView):
+class ArticleUpdateView(LoginRequiredMixin, UpdateView):
     model = Blog
     fields = ('title', 'content', 'image', 'is_published',)
 
@@ -142,6 +148,6 @@ class ArticleUpdateView(UpdateView):
         return reverse('catalog:view', args=[self.kwargs.get('slug')])
 
 
-class ArticleDeleteView(DeleteView):
+class ArticleDeleteView(LoginRequiredMixin, DeleteView):
     model = Blog
     success_url = reverse_lazy('catalog:articles')

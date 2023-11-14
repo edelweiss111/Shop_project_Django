@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 import psycopg2
 from django.db import connection
@@ -17,6 +18,7 @@ class Product(models.Model):
     date_added = models.DateField(auto_now_add=True, verbose_name='Дата создания')
     date_modified = models.DateField(auto_now=True, verbose_name='Дата изменения')
     price = models.IntegerField(verbose_name='Цена', default=0)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE, verbose_name='Кем создан')
 
     @classmethod
     def truncate_table_restart_id(cls):
