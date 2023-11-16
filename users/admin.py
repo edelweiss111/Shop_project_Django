@@ -5,4 +5,5 @@ from users.models import User
 
 @admin.register(User)
 class UsersAdmin(admin.ModelAdmin):
+    """Админка модели User"""
     list_display = ('email', 'verify_code',)

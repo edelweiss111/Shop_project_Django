@@ -13,23 +13,28 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 
 class LoginUserView(LoginView):
+    """Контроллер страницы входа"""
     template_name = 'users/login.html'
 
 
 class LogoutUserView(LogoutView):
+    """Контроллер выхода из аккаунта"""
     pass
 
 
 class RegisterUserView(SuccessMessageMixin, CreateView):
+    """Контроллер страницы регистрации"""
     model = User
     form_class = RegisterForm
     success_url = reverse_lazy('users:login')
     template_name = 'users/register.html'
 
     def get_success_message(self, cleaned_data):
+        """Сообщение на страницу входа"""
         return 'Вам на почту отправлено письмо, для прохождения верификации перейдите по ссылку в письме'
 
     def form_valid(self, form):
+        """Верификация по ссылке через почту"""
         new_user = form.save()
         code = ''.join(random.sample('0123456789', 5))
         new_user.verify_code = code
@@ -44,6 +49,7 @@ class RegisterUserView(SuccessMessageMixin, CreateView):
 
 
 def verification(request, code):
+    """Контроллер подтверждения верификации"""
     user = User.objects.get(verify_code=code)
     user.is_active = True
     user.save()
@@ -51,15 +57,18 @@ def verification(request, code):
 
 
 class UserUpdateView(UpdateView):
+    """Контроллер страницы редактирования профиля"""
     model = User
     form_class = UserForm
     success_url = reverse_lazy('users:profile')
 
     def get_object(self, queryset=None):
+        """Отключение необходимости получения pk"""
         return self.request.user
 
 
 def generate_password(request):
+    """Контроллер смены пароля и отправка нового сгенерированного пароля на почту"""
     new_password = User.objects.make_random_password()
     request.user.set_password(new_password)
     request.user.save()

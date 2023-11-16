@@ -1,14 +1,13 @@
 from django.forms import inlineformset_factory
 from django.shortcuts import render
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, TemplateView, UpdateView, DeleteView
-from pytils.translit import slugify
-from django.core.mail import send_mail
+
 from django.db import transaction
 from django.contrib.auth.mixins import LoginRequiredMixin
 from catalog.forms import ProductForm, VersionForm
-from config.settings import EMAIL_HOST_USER
-from catalog.models import Product, Contact, Blog, Version
+
+from catalog.models import Product, Contact, Version
 
 
 # Create your views here.
@@ -19,6 +18,7 @@ class HomeListView(LoginRequiredMixin, ListView):
     template_name = 'catalog/home_list.html'
 
     def get_queryset(self, *args, **kwargs):
+        """Отображение только 5 последних добавленных товаров"""
         queryset = super().get_queryset(*args, **kwargs)
         queryset = queryset.all()
         queryset = list(reversed(queryset))
@@ -35,6 +35,7 @@ class ContactTemplateView(TemplateView):
     template_name = 'catalog/contact.html'
 
     def post(self, request):
+        """Вывод сообщения из формы обратной связи"""
         if request.method == 'POST':
             name = request.POST.get('name')
             email = request.POST.get('email')
@@ -56,6 +57,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy('catalog:products')
 
     def form_valid(self, form):
+        """Добавление автора к товару"""
         self.object = form.save()
         self.object.author = self.request.user
         self.object.save()
@@ -63,15 +65,18 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
 
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
+    """Контроллер отображения отдельного товара"""
     model = Product
 
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
+    """Контроллер страницы редактирования товара"""
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:products')
 
     def get_context_data(self, **kwargs):
+        """Добавление формсета 'Версия' к товару"""
         context_data = super().get_context_data(**kwargs)
         FormSet = inlineformset_factory(self.model, Version, form=VersionForm, extra=1)
         if self.request.method == 'POST':
@@ -81,6 +86,7 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
         return context_data
 
     def form_valid(self, form):
+        """Сохранение данных из формсета"""
         formset = self.get_context_data()['formset']
         with transaction.atomic():
             if form.is_valid():
@@ -92,62 +98,3 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
                     return self.form_invalid(form)
 
         return super().form_valid(form)
-
-
-class ArticleListView(LoginRequiredMixin, ListView):
-    model = Blog
-
-    def get_queryset(self, *args, **kwargs):
-        queryset = super().get_queryset(*args, **kwargs)
-        queryset = queryset.filter(is_published=True)
-        return queryset
-
-
-class ArticleDetailView(LoginRequiredMixin, DetailView):
-    model = Blog
-
-    def get_object(self, queryset=None):
-        self.object = super().get_object(queryset)
-        self.object.views_count += 1
-        if self.object.views_count == 100:
-            send_mail(
-                'Вы популярны!!!!',
-                'Вы набрали 100 просмотров',
-                EMAIL_HOST_USER,
-                ['ya.savchik2000@mail.ru']
-            )
-        self.object.save()
-        return self.object
-
-
-class ArticleCreateView(LoginRequiredMixin, CreateView):
-    model = Blog
-    fields = ('title', 'content', 'image', 'is_published')
-    success_url = reverse_lazy('catalog:articles')
-
-    def form_valid(self, form):
-        if form.is_valid():
-            new_article = form.save()
-            new_article.slug = slugify(new_article.title)
-            new_article.save()
-        return super().form_valid(form)
-
-
-class ArticleUpdateView(LoginRequiredMixin, UpdateView):
-    model = Blog
-    fields = ('title', 'content', 'image', 'is_published',)
-
-    def form_valid(self, form):
-        if form.is_valid():
-            new_article = form.save()
-            new_article.slug = slugify(new_article.title)
-            new_article.save()
-        return super().form_valid(form)
-
-    def get_success_url(self):
-        return reverse('catalog:view', args=[self.kwargs.get('slug')])
-
-
-class ArticleDeleteView(LoginRequiredMixin, DeleteView):
-    model = Blog
-    success_url = reverse_lazy('catalog:articles')

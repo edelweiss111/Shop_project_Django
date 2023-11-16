@@ -2,11 +2,11 @@
 {% load my_tags %}
 {% block content %}
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <br></br>
+    <br />
     <h1 class="display-4">Статьи</h1>
 </div>
 <div class="col-12 mb-5">
-  <a class="btn btn-outline-primary" href="{% url 'catalog:create' %}">Добавить статью</a>
+  <a class="btn btn-outline-primary" href="{% url 'blog:create' %}">Добавить статью</a>
 </div>
 {% for item in object_list %}
 <div class="row mb-2">
@@ -22,14 +22,14 @@
           <p class="card-text mb-auto">{{item.content|slice:100}}...</p>
             <div class="row">
                 <div class="col-6">
-                    <a href="{% url 'catalog:view' item.slug %}" class="icon-link gap-1 icon-link-hover stretched-link">
+                    <a href="{% url 'blog:view' item.slug %}" class="icon-link gap-1 icon-link-hover stretched-link">
                         Читать далее
                     </a>
                 </div>
                 <div class="col-6">
                     <div class="btn-group">
-                        <a type="button" class="btn btn-outline-primary" href="{% url 'catalog:update' item.slug %}">Редактировать</a>
-                        <a type="button" class="btn btn-outline-danger" href="{% url 'catalog:delete' item.slug %}">Удалить</a>
+                        <a type="button" class="btn btn-outline-primary" href="{% url 'blog:update' item.slug %}">Редактировать</a>
+                        <a type="button" class="btn btn-outline-danger" href="{% url 'blog:delete' item.slug %}">Удалить</a>
                     </div>
                 </div>
             </div>

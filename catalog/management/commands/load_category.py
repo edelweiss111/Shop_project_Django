@@ -5,7 +5,7 @@ import json
 
 
 class Command(BaseCommand):
-
+    """Команда загрузки данных в таблицу Category"""
     def handle(self, *args, **options):
         """Команда загрузки данных в таблицу Category"""
         with open(DATA, encoding='utf-8') as file:

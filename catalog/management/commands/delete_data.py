@@ -3,7 +3,7 @@ from catalog.models import Product, Category
 
 
 class Command(BaseCommand):
-
+    """Команда удаления данных из базы и обнуления счетчика автоинкремента"""
     def handle(self, *args, **options):
         try:
             Category.truncate_table_restart_id()
