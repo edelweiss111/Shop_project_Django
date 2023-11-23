@@ -7,7 +7,7 @@ from config.settings import EMAIL_HOST_USER
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
 class ArticleListView(LoginRequiredMixin, ListView):
@@ -55,10 +55,11 @@ class ArticleCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ArticleUpdateView(LoginRequiredMixin, UpdateView):
+class ArticleUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     """Контроллер редактирования статьи"""
     model = Blog
     fields = ('title', 'content', 'image', 'is_published',)
+    permission_required = 'blog.change_blog'
 
     def form_valid(self, form):
         """Обновление slug"""
@@ -73,7 +74,8 @@ class ArticleUpdateView(LoginRequiredMixin, UpdateView):
         return reverse('blog:view', args=[self.kwargs.get('slug')])
 
 
-class ArticleDeleteView(LoginRequiredMixin, DeleteView):
+class ArticleDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     """Контроллер удаления статьи"""
+    permission_required = 'blog.delete_blog'
     model = Blog
     success_url = reverse_lazy('blog:articles')

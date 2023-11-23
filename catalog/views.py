@@ -1,11 +1,12 @@
 from django.forms import inlineformset_factory
+from django.http import Http404
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, TemplateView, UpdateView, DeleteView
 
 from django.db import transaction
-from django.contrib.auth.mixins import LoginRequiredMixin
-from catalog.forms import ProductForm, VersionForm
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from catalog.forms import ProductForm, VersionForm, ModeratorProductForm
 
 from catalog.models import Product, Contact, Version
 
@@ -69,11 +70,27 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
 
 
-class ProductUpdateView(LoginRequiredMixin, UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """Контроллер страницы редактирования товара"""
     model = Product
-    form_class = ProductForm
     success_url = reverse_lazy('catalog:products')
+
+    def test_func(self):
+        custom_perms = (
+            'catalog.set_is_published',
+            'catalog.set_category',
+            'catalog.set_description'
+        )
+        if self.request.user == self.get_object().author or self.request.user.is_superuser is True:
+            return True
+        elif self.request.user.groups.filter(name='moderators').exists() and self.request.user.has_perms(custom_perms):
+            return True
+        return self.handle_no_permission()
+
+    def get_form_class(self):
+        if self.request.user.is_staff is True:
+            return ModeratorProductForm
+        return ProductForm
 
     def get_context_data(self, **kwargs):
         """Добавление формсета 'Версия' к товару"""
@@ -98,3 +115,20 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
                     return self.form_invalid(form)
 
         return super().form_valid(form)
+
+
+class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    """Контроллер удаления статьи"""
+    model = Product
+    success_url = reverse_lazy('catalog:products')
+
+    def test_func(self):
+        if self.request.user == self.get_object().author or self.request.user.is_superuser is True:
+            return True
+        return self.handle_no_permission()
+
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        if self.request.user != self.object.author and self.request.user.is_staff is not True:
+            raise Http404
+        return self.object

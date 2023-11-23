@@ -5,6 +5,7 @@ from catalog.models import Product, Version
 
 class StyleFormMixin:
     """Миксин для стилизации форм"""
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
@@ -13,6 +14,7 @@ class StyleFormMixin:
 
 class ProductForm(StyleFormMixin, forms.ModelForm):
     """Форма для модели Product"""
+
     class Meta:
         model = Product
         fields = ('name', 'description', 'image', 'category', 'price',)
@@ -40,8 +42,15 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
         return cleaned_data
 
 
+class ModeratorProductForm(ProductForm):
+    class Meta:
+        model = Product
+        fields = ('description', 'category', 'is_published',)
+
+
 class VersionForm(StyleFormMixin, forms.ModelForm):
     """Форма для модели Version"""
+
     class Meta:
         model = Version
         exclude = ('product',)

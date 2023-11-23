@@ -20,6 +20,7 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='Цена', default=0)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, **NULLABLE,
                                verbose_name='Кем создан')
+    is_published = models.BooleanField(default=False, verbose_name='Опубликовано')
 
     @classmethod
     def truncate_table_restart_id(cls):
@@ -38,6 +39,21 @@ class Product(models.Model):
         """Класс отображения метаданных"""
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
+
+        permissions = [
+            (
+                'set_is_published',
+                'Can publish product'
+            ),
+            (
+                'set_category',
+                'Can change category'
+            ),
+            (
+                'set_description',
+                'Can change description'
+            ),
+        ]
 
 
 class Category(models.Model):
