@@ -73,7 +73,9 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
 class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """Контроллер страницы редактирования товара"""
     model = Product
-    success_url = reverse_lazy('catalog:products')
+
+    def get_success_url(self):
+        return reverse_lazy('catalog:products')
 
     def test_func(self):
         custom_perms = (
@@ -88,7 +90,7 @@ class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return self.handle_no_permission()
 
     def get_form_class(self):
-        if self.request.user.is_staff is True:
+        if self.request.user.groups.filter(name='moderators').exists():
             return ModeratorProductForm
         return ProductForm
 
@@ -127,8 +129,3 @@ class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return self.handle_no_permission()
 
-    def get_object(self, queryset=None):
-        self.object = super().get_object(queryset)
-        if self.request.user != self.object.author and self.request.user.is_staff is not True:
-            raise Http404
-        return self.object
