@@ -162,9 +162,9 @@ if CACHE_ENABLED:
     }
 
 MIDDLEWARE = [
+    "django.middleware.cache.UpdateCacheMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    "django.middleware.cache.UpdateCacheMiddleware",
     'django.contrib.messages.middleware.MessageMiddleware',
     "django.middleware.cache.FetchFromCacheMiddleware",
 ]
