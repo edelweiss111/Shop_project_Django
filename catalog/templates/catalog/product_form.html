@@ -37,7 +37,7 @@
                 <div class="card-footer"></div>
             </div>
         </div>
-        {% if user.is_staff == False %}
+        {% if product.author == user or user.is_superuser is True %}
         <div class="col-6">
             <div class="card">
                 {% if object %}

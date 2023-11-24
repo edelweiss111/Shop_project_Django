@@ -97,16 +97,21 @@ class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def get_context_data(self, **kwargs):
         """Добавление формсета 'Версия' к товару"""
         context_data = super().get_context_data(**kwargs)
-        FormSet = inlineformset_factory(self.model, Version, form=VersionForm, extra=1)
-        if self.request.method == 'POST':
-            context_data['formset'] = FormSet(self.request.POST, instance=self.object)
+        if self.request.user.groups.filter(name='moderators').exists():
+            context_data['formset'] = None
         else:
-            context_data['formset'] = FormSet(instance=self.object)
+            FormSet = inlineformset_factory(self.model, Version, form=VersionForm, extra=1)
+            if self.request.method == 'POST':
+                context_data['formset'] = FormSet(self.request.POST, instance=self.object)
+            else:
+                context_data['formset'] = FormSet(instance=self.object)
         return context_data
 
     def form_valid(self, form):
         """Сохранение данных из формсета"""
         formset = self.get_context_data()['formset']
+        if formset is None:
+            return super().form_valid(form)
         with transaction.atomic():
             if form.is_valid():
                 self.object = form.save()
