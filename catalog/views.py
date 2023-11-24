@@ -8,7 +8,7 @@ from django.db import transaction
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from catalog.forms import ProductForm, VersionForm, ModeratorProductForm
 
-from catalog.models import Product, Contact, Version
+from catalog.models import Product, Contact, Version, Category
 
 
 # Create your views here.
@@ -25,20 +25,6 @@ class HomeListView(LoginRequiredMixin, ListView):
         queryset = list(reversed(queryset))
 
         return queryset[:5]
-
-
-class CategoryView(LoginRequiredMixin, ListView):
-    """Контроллер домашней страницы"""
-    model = Product
-
-    template_name = 'catalog/product_list.html'
-
-    def get_queryset(self):
-        """Отображение товаров по категории"""
-        queryset = super().get_queryset()
-        queryset = queryset.filter(category=self.kwargs.get('pk'))
-
-        return queryset
 
 
 class ContactTemplateView(TemplateView):
