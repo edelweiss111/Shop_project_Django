@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "django.middleware.cache.UpdateCacheMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -54,6 +55,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.cache.FetchFromCacheMiddleware",
+
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -152,7 +155,6 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = 'users:login'
 
 CACHE_ENABLED = True
-
 if CACHE_ENABLED:
     CACHES = {
         'default': {
@@ -160,11 +162,3 @@ if CACHE_ENABLED:
             'LOCATION': 'redis://127.0.0.1:6379'
         }
     }
-
-MIDDLEWARE = [
-    "django.middleware.cache.UpdateCacheMiddleware",
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    "django.middleware.cache.FetchFromCacheMiddleware",
-]
