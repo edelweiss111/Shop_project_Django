@@ -8,7 +8,7 @@ from django.db import transaction
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from catalog.forms import ProductForm, VersionForm, ModeratorProductForm
 
-from catalog.models import Product, Contact, Version, Category
+from catalog.models import Product, Contact, Version
 
 
 # Create your views here.

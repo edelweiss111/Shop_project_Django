@@ -160,3 +160,11 @@ if CACHE_ENABLED:
             'LOCATION': 'redis://127.0.0.1:6379'
         }
     }
+
+MIDDLEWARE = [
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    "django.middleware.cache.UpdateCacheMiddleware",
+    'django.contrib.messages.middleware.MessageMiddleware',
+    "django.middleware.cache.FetchFromCacheMiddleware",
+]
