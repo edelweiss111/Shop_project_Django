@@ -1,5 +1,5 @@
 from django.forms import inlineformset_factory
-from django.http import Http404
+
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, TemplateView, UpdateView, DeleteView
@@ -25,6 +25,20 @@ class HomeListView(LoginRequiredMixin, ListView):
         queryset = list(reversed(queryset))
 
         return queryset[:5]
+
+
+class CategoryView(LoginRequiredMixin, ListView):
+    """Контроллер домашней страницы"""
+    model = Product
+
+    template_name = 'catalog/product_list.html'
+
+    def get_queryset(self):
+        """Отображение товаров по категории"""
+        queryset = super().get_queryset()
+        queryset = queryset.filter(category=self.kwargs.get('pk'))
+
+        return queryset
 
 
 class ContactTemplateView(TemplateView):
@@ -133,4 +147,3 @@ class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == self.get_object().author or self.request.user.is_superuser is True:
             return True
         return self.handle_no_permission()
-
