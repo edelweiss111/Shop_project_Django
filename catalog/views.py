@@ -9,6 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from catalog.forms import ProductForm, VersionForm, ModeratorProductForm
 
 from catalog.models import Product, Contact, Version
+from catalog.service import check_user
 
 
 # Create your views here.
@@ -78,14 +79,9 @@ class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return reverse_lazy('catalog:products')
 
     def test_func(self):
-        custom_perms = (
-            'catalog.set_is_published',
-            'catalog.set_category',
-            'catalog.set_description'
-        )
-        if self.request.user == self.get_object().author or self.request.user.is_superuser is True:
-            return True
-        elif self.request.user.groups.filter(name='moderators').exists() and self.request.user.has_perms(custom_perms):
+        user = self.request.user
+        author = self.get_object().author
+        if check_user(user, author):
             return True
         return self.handle_no_permission()
 
