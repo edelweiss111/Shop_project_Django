@@ -1,5 +1,6 @@
+import os
+
 from django.core.management import BaseCommand
-from config.settings import PASSWORD
 from users.models import User
 
 
@@ -14,5 +15,5 @@ class Command(BaseCommand):
             is_superuser=True
         )
 
-        user.set_password(PASSWORD)
+        user.set_password(os.getenv('PASSWORD'))
         user.save()
