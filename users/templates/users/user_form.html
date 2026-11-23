@@ -1,25 +1,30 @@
-{%extends 'catalog/base.html' %}
+{% extends 'catalog/base.html' %}
+
+{% block title %}Мой профиль — sStore{% endblock %}
+
 {% block content %}
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <br></br>
-    <h4 class="display-4">Редактировать профиль</h4>
-</div>
-<div class="row">
-    <div class="col-4"></div>
-    <div class="col-4">
-        <div class="card">
-            <div class="card-header">Мой профиль</div>
-            <div class="card-body">
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit" class="btn btn-success">Сохранить</button>
-                </form>
+<section class="auth-page">
+    <div class="auth-card">
+        <h1 class="auth-title">Редактирование профиля</h1>
+        <p class="auth-description">
+            Здесь вы можете изменить данные своего аккаунта.
+        </p>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <div class="d-flex flex-wrap align-items-center gap-3 mt-4">
+                <button type="submit" class="btn btn-primary">
+                    Сохранить
+                </button>
+
+                <a href="{% url 'users:genpassword' %}" class="btn btn-outline-danger">
+                    Сгенерировать новый пароль
+                </a>
             </div>
-            <div class="card-footer">
-                <a href="{% url 'users:genpassword' %}" class="btn btn-danger">Сгенерировать новый пароль</a>
-            </div>
-        </div>
+        </form>
     </div>
-</div>
+</section>
 {% endblock %}

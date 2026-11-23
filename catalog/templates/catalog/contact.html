@@ -1,48 +1,116 @@
-{%extends 'catalog/base.html' %}
-{% block content %}
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <br />
-    <h1 class="display-4">Контакты</h1>
-</div>
 
-<div class="container">
-    <div class="row text-start">
-        <div class="col-lg-9 col-md-6 col-sm-12">
-            <div class="card mb-4 box-shadow">
-                <div class="card-body">
-                    <table class="table table-striped">
+{% extends 'catalog/base.html' %}
+
+{% block title %}Контакты — sStore{% endblock %}
+
+{% block content %}
+
+<section class="contacts-page">
+
+    <h1 class="page-title">Контакты</h1>
+
+    <div class="contacts-layout">
+
+        <!-- Список сотрудников -->
+        <section class="contacts-list">
+
+            <h2>Наша команда</h2>
+
+            <div class="table-responsive">
+
+                <table class="table table-striped">
+
+                    <thead>
                         <tr>
-                            <td class="w-25">Имя</td>
-                            <td>Должность</td>
-                            <td>Почта</td>
+                            <th scope="col">Имя</th>
+                            <th scope="col">Должность</th>
+                            <th scope="col">Почта</th>
                         </tr>
+                    </thead>
+
+                    <tbody>
+
                         {% for contact in contact_list %}
-                        <tr>
-                            <td class="w-25">{{contact.name|title}}</td>
-                            <td>{{contact.post}}</td>
-                            <td>{{contact.email}}</td>
-                        </tr>
+                            <tr>
+                                <td>{{ contact.name|title }}</td>
+                                <td>{{ contact.post }}</td>
+                                <td>
+                                    <a href="mailto:{{ contact.email }}">
+                                        {{ contact.email }}
+                                    </a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="3">
+                                    Контактная информация пока отсутствует.
+                                </td>
+                            </tr>
                         {% endfor %}
-                    </table>
-                </div>
+
+                    </tbody>
+
+                </table>
+
             </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="card mb-4 box-shadow">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">Свяжитесь с нами</h4>
+
+        </section>
+
+        <!-- Форма обратной связи -->
+        <section class="contacts-form">
+
+            <h2>Свяжитесь с нами</h2>
+
+            <form method="post">
+
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="contact-name">Ваше имя</label>
+                    <input
+                        id="contact-name"
+                        name="name"
+                        class="form-control"
+                        placeholder="Введите имя"
+                        type="text"
+                        required
+                    >
                 </div>
-                <div class="card-body">
-                        <form method="post">
-                            {% csrf_token %}
-                            <input name="name" class="form-control mb-2" placeholder="Имя" type="text">
-                            <input name="email" class="form-control mb-2" placeholder="Email" type="email">
-                            <textarea name="message" class="form-control mb-2" placeholder="Сообщение"></textarea>
-                            <input class="btn btn-primary w-100" type="submit" value="Отправить" />
-                        </form>
+
+                <div class="mb-3">
+                    <label for="contact-email">Email</label>
+                    <input
+                        id="contact-email"
+                        name="email"
+                        class="form-control"
+                        placeholder="Введите email"
+                        type="email"
+                        required
+                    >
                 </div>
-            </div>
-        </div>
+
+                <div class="mb-3">
+                    <label for="contact-message">Сообщение</label>
+                    <textarea
+                        id="contact-message"
+                        name="message"
+                        class="form-control"
+                        placeholder="Введите сообщение"
+                        rows="5"
+                        required
+                    ></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100">
+                    Отправить
+                </button>
+
+            </form>
+
+        </section>
+
     </div>
-</div>
+
+</section>
+
 {% endblock %}

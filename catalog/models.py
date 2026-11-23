@@ -32,6 +32,11 @@ class Product(models.Model):
             except psycopg2.errors.Error as e:
                 raise e
 
+    @property
+    def active_version(self):
+        """Возвращает текущую активную версию товара или None, если её нет."""
+        return self.version_set.filter(is_active=True).first()
+
     def __str__(self):
         return f'{self.name}'
 

@@ -8,9 +8,9 @@ packages = [{include = "django_project"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
-django = "^4.2.6"
-psycopg2-binary = "^2.9.9"
-pillow = "^10.1.0"
+django = "^5.2"
+psycopg2-binary = "^2.9.13"
+pillow = "^12.0"
 ipython = "^8.16.1"
 pytils = "^0.4.1"
 redis = "^5.0.1"

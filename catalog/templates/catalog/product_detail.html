@@ -1,29 +1,63 @@
-{%extends 'catalog/base.html' %}
-{% block content %}
+{% extends 'catalog/base.html' %}
 {% load my_tags %}
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <br />
-    <h2 class="display-4">{{object.name}}</h2>
-</div>
-<div class="card mb-3" style="max-width: 540px;">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src="{% mediapath product.image %}" class="img-fluid rounded-start" alt="">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h5 class="card-title">{{object.name}}</h5>
-        <p class="card-text">{{object.description}}</p>
-        <div class="card-footer">
-          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-              <div class="col">
-                 <h4 class="card-title pricing-card-title">{{object.price}} р.</h4>
-                 <p>Автор: {{object.author|default:"Нет информации"}}</p>
-              </div>
-          </div>
+
+{% block title %}{{ object.name }} — sStore{% endblock %}
+
+{% block content %}
+
+<section class="product-detail py-3">
+
+    <h1 class="product-detail-title mb-4">
+        {{ object.name }}
+    </h1>
+
+    <article class="product-detail-card card shadow-sm p-4">
+        <div class="row g-4 align-items-center">
+
+            <div class="col-md-5 text-center">
+                <div class="product-detail-image bg-light rounded p-3 d-flex align-items-center justify-content-center"
+                     style="height: 360px;">
+                    {% if object.image %}
+                        <img
+                            src="{% mediapath object.image %}"
+                            alt="{{ object.name }}"
+                            class="img-fluid"
+                            style="max-height: 100%; max-width: 100%; object-fit: contain;"
+                        >
+                    {% else %}
+                        <span class="text-muted">Изображение отсутствует</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-md-7">
+                <div class="product-detail-info">
+
+                    <h2 class="h4 mb-3">{{ object.name }}</h2>
+
+                    <p class="product-detail-description text-muted mb-3">
+                        {{ object.description|default:"Описание отсутствует." }}
+                    </p>
+
+                    <p class="product-detail-price fs-4 fw-bold mb-3">
+                        {{ object.price }} ₽
+                    </p>
+
+                    <p class="product-detail-author small text-secondary mb-4">
+                        Автор: {{ object.author|default:"Нет информации" }}
+                    </p>
+
+                    <a href="{% url 'catalog:products' %}"
+                       class="btn btn-outline-primary">
+                        Вернуться в каталог
+                    </a>
+
+                </div>
+            </div>
+
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+    </article>
+
+</section>
+
 {% endblock %}

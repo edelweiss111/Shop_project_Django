@@ -1,0 +1,224 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Смартфоны и гаджеты",
+      "description": "Смартфоны, наушники и носимая электроника популярных брендов."
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Ноутбуки и мониторы",
+      "description": "Ноутбуки для работы, учёбы и мультимедиа, а также мониторы."
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "Бытовая техника",
+      "description": "Техника для дома и кухни от проверенных производителей."
+    }
+  },
+  {
+    "model": "catalog.contact",
+    "pk": 1,
+    "fields": {
+      "name": "Алексей Смирнов",
+      "email": "support@sstore.local",
+      "post": "Руководитель службы поддержки"
+    }
+  },
+  {
+    "model": "catalog.contact",
+    "pk": 2,
+    "fields": {
+      "name": "Мария Волкова",
+      "email": "sales@sstore.local",
+      "post": "Менеджер по работе с клиентами"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "Apple iPhone 16",
+      "description": "Смартфон Apple с дисплеем Super Retina XDR, чипом A18 и двойной камерой 48 Мп.",
+      "image": "products/iPhone16.jpg",
+      "category": 1,
+      "date_added": "2026-11-01",
+      "date_modified": "2026-11-01",
+      "price": 79990,
+      "author": null,
+      "is_published": true
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "Samsung Galaxy S24",
+      "description": "Смартфон Samsung с AMOLED-экраном 120 Гц, тройной камерой и защитой от воды IP68.",
+      "image": "products/GalaxyS24.jpg",
+      "category": 1,
+      "date_added": "2026-11-02",
+      "date_modified": "2026-11-02",
+      "price": 69990,
+      "author": null,
+      "is_published": true
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "Xiaomi Redmi Note 13 Pro",
+      "description": "Смартфон Xiaomi с экраном AMOLED 120 Гц, камерой 200 Мп и быстрой зарядкой.",
+      "image": "products/Note13Pro.jpg",
+      "category": 1,
+      "date_added": "2026-11-03",
+      "date_modified": "2026-11-03",
+      "price": 27990,
+      "author": null,
+      "is_published": true
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "name": "Sony WH-1000XM5",
+      "description": "Беспроводные накладные наушники Sony с активным шумоподавлением и автономностью до 30 часов.",
+      "image": "products/sony_wh1000xm5_beige_silver_3.jpg",
+      "category": 1,
+      "date_added": "2026-11-04",
+      "date_modified": "2026-11-04",
+      "price": 32990,
+      "author": null,
+      "is_published": true
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "name": "Apple MacBook Air 13 M3",
+      "description": "Тонкий ноутбук Apple на чипе M3 с экраном Liquid Retina и бесшумным охлаждением.",
+      "image": "products/AppleMacBookAir13M3.jpg",
+      "category": 2,
+      "date_added": "2026-11-05",
+      "date_modified": "2026-11-05",
+      "price": 114990,
+      "author": null,
+      "is_published": true
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "name": "ASUS Vivobook 15",
+      "description": "Универсальный ноутбук ASUS для работы и учёбы с экраном Full HD и быстрым SSD.",
+      "image": "products/ASUSVivobook15.jpg",
+      "category": 2,
+      "date_added": "2026-11-06",
+      "date_modified": "2026-11-06",
+      "price": 54990,
+      "author": null,
+      "is_published": true
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+      "name": "LG UltraGear 27GN800",
+      "description": "Игровой монитор LG 27 дюймов с матрицей IPS QHD, частотой 144 Гц и откликом 1 мс.",
+      "image": "products/LG UltraGear27GN800.jpg",
+      "category": 2,
+      "date_added": "2026-11-07",
+      "date_modified": "2026-11-07",
+      "price": 29990,
+      "author": null,
+      "is_published": true
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+      "name": "Dyson V8 Absolute",
+      "description": "Беспроводной вертикальный пылесос Dyson с циклонной фильтрацией и насадками для разных покрытий.",
+      "image": "products/DysonV8Absolute.jpg",
+      "category": 3,
+      "date_added": "2026-11-08",
+      "date_modified": "2026-11-08",
+      "price": 39990,
+      "author": null,
+      "is_published": true
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 9,
+    "fields": {
+      "name": "DeLonghi Magnifica S",
+      "description": "Автоматическая кофемашина DeLonghi со встроенной кофемолкой и ручным капучинатором.",
+      "image": "products/DeLonghiMagnificaS.jpg",
+      "category": 3,
+      "date_added": "2026-11-09",
+      "date_modified": "2026-11-09",
+      "price": 42990,
+      "author": null,
+      "is_published": false
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 10,
+    "fields": {
+      "name": "Bosch Serie 6",
+      "description": "Стиральная машина Bosch с инверторным двигателем, защитой от протечек и набором программ.",
+      "image": "products/BoschSerie6.jpg",
+      "category": 3,
+      "date_added": "2026-11-10",
+      "date_modified": "2026-11-10",
+      "price": 46990,
+      "author": null,
+      "is_published": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 1,
+    "fields": {
+      "product": 1,
+      "name": "iOS 18.1",
+      "number": 18.1,
+      "is_active": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 2,
+    "fields": {
+      "product": 2,
+      "name": "One UI 6.1",
+      "number": 6.1,
+      "is_active": true
+    }
+  },
+  {
+    "model": "catalog.version",
+    "pk": 3,
+    "fields": {
+      "product": 5,
+      "name": "macOS Sequoia 15.1",
+      "number": 15.1,
+      "is_active": true
+    }
+  }
+]

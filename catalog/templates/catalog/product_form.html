@@ -1,64 +1,70 @@
-{%extends 'catalog/base.html' %}
+
+{% extends 'catalog/base.html' %}
+
+{% block title %}
+    {% if object %}Редактирование товара{% else %}Добавление товара{% endif %} — sStore
+{% endblock %}
+
 {% block content %}
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <br />
-    <h2 class="display-4">
+
+<section class="product-form-page">
+
+    <h1 class="page-title">
         {% if object %}
-        Редактировать
+            Редактировать товар
         {% else %}
-        Добавить товар {% endif %}
-    </h2>
-</div>
-<div class="col-12">
-    <form enctype="multipart/form-data" class="row" method="post">
-        <div class="col-6">
-            <div class="card">
-                <div class="card-title">
-                    <div class="card-header">
-                        <h4 class="card-title">{{object.name}}</h4>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="col-6">
-
-                        {% csrf_token %}
-                        <table>
-                            {{ form.as_table }}
-                        </table>
-                        <button type="submit" class="btn btn-success">
-                            {% if object %}
-                            Сохранить
-                            {% else %}
-                            Создать
-                            {% endif %}
-                        </button>
-                    </div>
-                </div>
-                <div class="card-footer"></div>
-            </div>
-        </div>
-        {% if product.author == user or user.is_superuser is True %}
-        <div class="col-6">
-            <div class="card">
-                {% if object %}
-                <div class="card-header">
-                    <h3 class="card-title">Версии</h3>
-                </div>
-                <div class="card-body">
-                    <table>
-                        {{ formset.management_form }}
-                        {% for form in formset %}
-                        {{form.as_table}}
-                        {% endfor %}
-                    </table>
-                </div>
-                <div class="card-footer"></div>
-                {% endif %}
-            </div>
-        </div>
+            Добавить товар
         {% endif %}
-    </form>
-</div>
+    </h1>
 
+    <form method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <div class="product-form-layout">
+
+            <!-- Основная информация о товаре -->
+            <div class="product-form-card">
+
+                {% if object %}
+                    <h2>{{ object.name }}</h2>
+                {% else %}
+                    <h2>Информация о товаре</h2>
+                {% endif %}
+
+                {{ form.as_p }}
+
+                <button type="submit" class="btn btn-success">
+                    {% if object %}
+                        Сохранить
+                    {% else %}
+                        Создать
+                    {% endif %}
+                </button>
+
+            </div>
+
+            <!-- Управление версиями -->
+            {% if object and formset %}
+                <div class="product-form-card">
+
+                    <h2>Версии товара</h2>
+
+                    {{ formset.management_form }}
+
+                    {% for form in formset %}
+                        <div class="version-form">
+                            {{ form.as_p }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+            {% endif %}
+
+        </div>
+
+    </form>
+
+</section>
 
 {% endblock %}
